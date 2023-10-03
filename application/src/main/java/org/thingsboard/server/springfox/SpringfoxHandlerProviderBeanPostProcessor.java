@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-//TODO: remove after fixing issue https://github.com/springfox/springfox/issues/3462 or after migration from springfox to springdoc
 public class SpringfoxHandlerProviderBeanPostProcessor implements BeanPostProcessor {
 
     @Override

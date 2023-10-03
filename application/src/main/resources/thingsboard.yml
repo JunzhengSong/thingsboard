@@ -87,7 +87,7 @@ zk:
   # Enable/disable zookeeper discovery service.
   enabled: "${ZOOKEEPER_ENABLED:false}"
   # Zookeeper connect string
-  url: "${ZOOKEEPER_URL:localhost:2181}"
+  url: "${ZOOKEEPER_URL:150.158.47.96:2181}"
   # Zookeeper retry interval in milliseconds
   retry_interval_ms: "${ZOOKEEPER_RETRY_INTERVAL_MS:3000}"
   # Zookeeper connection timeout in milliseconds
@@ -531,7 +531,7 @@ redis:
   connection:
     type: "${REDIS_CONNECTION_TYPE:standalone}"
   standalone:
-    host: "${REDIS_HOST:localhost}"
+    host: "${REDIS_HOST:150.158.47.96}"
     port: "${REDIS_PORT:6379}"
     useDefaultClientConfig: "${REDIS_USE_DEFAULT_CLIENT_CONFIG:true}"
     # this value may be used only if you used not default ClientConfig
@@ -638,9 +638,9 @@ spring:
       ddl-auto: "none"
   datasource:
     driverClassName: "${SPRING_DRIVER_CLASS_NAME:org.postgresql.Driver}"
-    url: "${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/thingsboard}"
-    username: "${SPRING_DATASOURCE_USERNAME:postgres}"
-    password: "${SPRING_DATASOURCE_PASSWORD:postgres}"
+    url: "${SPRING_DATASOURCE_URL:jdbc:postgresql://150.158.47.96:5432/thingsboard}"
+    username: "${SPRING_DATASOURCE_USERNAME:thingsboard}"
+    password: "${SPRING_DATASOURCE_PASSWORD:tmp.210.CZ}"
     hikari:
       leakDetectionThreshold: "${SPRING_DATASOURCE_HIKARI_LEAK_DETECTION_THRESHOLD:0}"
       maximumPoolSize: "${SPRING_DATASOURCE_MAXIMUM_POOL_SIZE:16}"
@@ -1080,7 +1080,7 @@ queue:
       # For debug lvl
       print-interval-ms: "${TB_QUEUE_IN_MEMORY_STATS_PRINT_INTERVAL_MS:60000}"
   kafka:
-    bootstrap.servers: "${TB_KAFKA_SERVERS:localhost:9092}"
+    bootstrap.servers: "${TB_KAFKA_SERVERS:150.158.47.96:9092}"
     ssl:
       enabled: "${TB_KAFKA_SSL_ENABLED:false}"
       truststore.location: "${TB_KAFKA_SSL_TRUSTSTORE_LOCATION:}"

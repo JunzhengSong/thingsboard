@@ -35,6 +35,39 @@ import java.util.stream.Collectors;
 
 /**
  * A size delimited Receive that consists of a 4 byte network-ordered size N followed by N bytes of content
+ * 这个类是`NetworkReceive`，它实现了`Receive`接口，表示网络接收的数据。以下是该类的主要功能和作用：
+ *
+ * 1. **大小限定的接收：** 该类表示一个大小限定的接收，它的数据由一个4字节的网络顺序大小N，后跟N字节的内容组成。
+ *
+ * 2. **构造函数：**
+ *    - 提供了多个构造函数，允许通过不同的参数设置`NetworkReceive`对象，包括来源（source）、缓冲区（buffer）、最大大小（maxSize）和内存池（memoryPool）等。
+ *
+ * 3. **属性：**
+ *    - `source`：表示接收的数据来源。
+ *    - `size`：表示接收数据的大小，使用4字节的ByteBuffer表示。
+ *    - `maxSize`：表示接收数据的最大允许大小。
+ *    - `memoryPool`：表示用于分配内存的内存池。
+ *    - `requestedBufferSize`：表示请求的缓冲区大小。
+ *
+ * 4. **读取数据：**
+ *    - `readFrom`方法通过`ScatteringByteChannel`从通道中读取数据，并根据协议解析大小信息，然后读取相应大小的数据到缓冲区。
+ *
+ * 5. **内存分配和释放：**
+ *    - 通过内存池进行缓冲区的分配，根据请求的大小尝试分配内存，并在需要时释放内存。
+ *
+ * 6. **状态和完成判断：**
+ *    - `complete`方法用于判断接收是否已完成，即大小和缓冲区都已接收完毕。
+ *    - `requiredMemoryAmountKnown`和`memoryAllocated`方法用于检查是否已知所需内存量以及是否已分配内存。
+ *
+ * 7. **关闭：**
+ *    - `close`方法用于关闭接收，并在需要时释放内存。
+ *
+ * 8. **其他方法：**
+ *    - `payload`方法用于获取接收的数据内容的ByteBuffer。
+ *    - `bytesRead`方法用于获取已读取的字节数。
+ *    - `size`方法用于获取接收的总大小，包括有效负载和大小缓冲区。
+ *
+ * 总体而言，`NetworkReceive`类用于表示和处理网络接收的数据，提供了各种方法来读取、分配内存、释放内存以及获取接收状态和数据信息。
  */
 public class NetworkReceive implements Receive {
 

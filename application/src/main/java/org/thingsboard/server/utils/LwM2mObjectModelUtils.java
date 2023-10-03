@@ -37,13 +37,18 @@ import java.util.List;
 import static org.thingsboard.server.common.data.lwm2m.LwM2mConstants.LWM2M_SEPARATOR_KEY;
 import static org.thingsboard.server.common.data.lwm2m.LwM2mConstants.LWM2M_SEPARATOR_SEARCH_TEXT;
 
+// 处理LwM2M（Lightweight M2M）对象模型（Object Model）的工具类
 @Slf4j
 public class LwM2mObjectModelUtils {
-    
+
     private static final TbDDFFileParser ddfFileParser = new TbDDFFileParser();
-    
+
+    //toLwm2mResource(TbResource resource) 方法：将TbResource对象转换为LwM2M资源对象。它通过解析TbResource中存储的XML数据，生成LwM2M对象模型，
+    // 并设置相应的属性，如资源键（resourceKey）、标题（title）、搜索文本（searchText）等。如果解析失败，会抛出相关异常。
     public static void toLwm2mResource (TbResource resource) throws ThingsboardException {
         try {
+            //通过Base64.getDecoder().decode(resource.getData())将resource中的Base64编码的数据解码为字节数组。
+            //通过parse转换成objectModel列表
             List<ObjectModel> objectModels =
                     ddfFileParser.parse(new ByteArrayInputStream(Base64.getDecoder().decode(resource.getData())), resource.getSearchText());
             if (!objectModels.isEmpty()) {
@@ -87,6 +92,7 @@ public class LwM2mObjectModelUtils {
                 LwM2mInstance instance = new LwM2mInstance();
                 instance.setId(0);
                 List<LwM2mResourceObserve> resources = new ArrayList<>();
+                // resources是map，使用foreach遍历，对里面的每个元素 （k,v)用lambda表达式处理
                 obj.resources.forEach((k, v) -> {
                     if (isSave) {
                         LwM2mResourceObserve lwM2MResourceObserve = new LwM2mResourceObserve(k, v.name, false, false, false);

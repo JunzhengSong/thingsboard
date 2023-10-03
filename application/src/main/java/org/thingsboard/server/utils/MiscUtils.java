@@ -25,6 +25,7 @@ import java.nio.charset.Charset;
 /**
  * @author Andrew Shvayka
  */
+//MiscellaneousUtils 包含各种常见杂项实用工具方法
 public class MiscUtils {
 
     public static final Charset UTF8 = Charset.forName("UTF-8");
